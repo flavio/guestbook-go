@@ -1,10 +1,12 @@
-FROM opensuse:latest
+FROM golang:1.8
 
-RUN useradd -d /app web
-WORKDIR /app
+COPY . /go/src/github.com/flavio/guestbook-go
 
-COPY guestbook-go /app/guestbook
-COPY public /app/public
+WORKDIR /go/src/github.com/flavio/guestbook-go
+
+RUN go build
+
+RUN useradd -d /go/src/github.com/flavio/guestbook-go web
 
 # Cannot use the --chown option of COPY because it's not supported by
 # Docker Hub's automated builds :/
@@ -14,4 +16,4 @@ USER web
 
 EXPOSE 4000
 
-ENTRYPOINT ["./guestbook"]
+ENTRYPOINT ["./guestbook-go"]
