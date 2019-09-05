@@ -2,7 +2,7 @@ FROM golang:1.13-alpine3.10
 
 COPY . /code/guestbook-go
 WORKDIR /code/guestbook-go
-RUN go build -mod vendor
+RUN CGO_ENABLED=0 go build -mod vendor
 
 
 FROM alpine:3.10
