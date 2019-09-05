@@ -9,6 +9,7 @@ Meant to be used as a demo of a simple containerized workload for Kubernetes.
   * `GUESTBOOK_REDIS_SOCKET`: path to the unix socket used by the Redis database.
   * `GUESTBOOK_REDIS_HOST`: host running the Redis database.
   * `GUESTBOOK_REDIS_PORT`: port used by the Redis database.
+  * `GUESTBOOK_REDIS_PASSWORD`: password used by the Redis database.
   * `GUESTBOOK_PORT`: port used by the guestbook web application.
 
 By default the guestbook will listen on port 4000 and will attempt to connect to
