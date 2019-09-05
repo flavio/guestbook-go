@@ -60,7 +60,10 @@ func main() {
 			fmt.Println("Using redis socket")
 		}
 
+		fmt.Println("Connecting to redis server")
 		db := setupRedisClient(redisHost, redisPort, redisSocket, redisPassword)
+		pong, err := db.Ping().Result()
+		fmt.Println(pong, err)
 
 		e := echo.New()
 		e.File("/", "public/index.html")
@@ -68,8 +71,7 @@ func main() {
 		e.PUT("/messages", handlers.PutMessage(db))
 		e.DELETE("/messages/:index", handlers.DeleteMessage(db))
 
-		err := e.Start(fmt.Sprintf(":%d", port))
-		if err != nil {
+		if err := e.Start(fmt.Sprintf(":%d", port)); err != nil {
 			return cli.NewExitError(err, 1)
 		}
 
