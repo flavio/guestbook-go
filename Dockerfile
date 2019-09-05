@@ -1,11 +1,11 @@
-FROM golang:1.13-alpine
+FROM golang:1.13-alpine3.10
 
 COPY . /code/guestbook-go
 WORKDIR /code/guestbook-go
 RUN go build -mod vendor
 
 
-FROM alpine
+FROM alpine:3.10
 WORKDIR /app
 RUN adduser -h /app -D web
 COPY --from=0 /code/guestbook-go/guestbook-go /app/guestbook
