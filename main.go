@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	var redisHost, redisSocket string
+	var redisHost, redisSocket, redisPassword string
 	var port, redisPort int
 
 	app := cli.NewApp()
@@ -40,6 +40,12 @@ func main() {
 			EnvVar:      "GUESTBOOK_REDIS_PORT",
 			Destination: &redisPort,
 		},
+		cli.StringFlag{
+			Name:        "redis-password",
+			Usage:       "`PASSWORD` used by the Redis server",
+			EnvVar:      "GUESTBOOK_REDIS_PASSWORD",
+			Destination: &redisPassword,
+		},
 		cli.IntFlag{
 			Name:        "port, p",
 			Value:       4000,
@@ -54,7 +60,7 @@ func main() {
 			fmt.Println("Using redis socket")
 		}
 
-		db := setupRedisClient(redisHost, redisPort, redisSocket)
+		db := setupRedisClient(redisHost, redisPort, redisSocket, redisPassword)
 
 		e := echo.New()
 		e.File("/", "public/index.html")
@@ -73,10 +79,10 @@ func main() {
 	app.Run(os.Args)
 }
 
-func setupRedisClient(host string, port int, socket string) *redis.Client {
+func setupRedisClient(host string, port int, socket string, password string) *redis.Client {
 	options := redis.Options{
-		Password: "", // no password set
-		DB:       0,  // use default DB
+		Password: password,
+		DB:       0, // use default DB
 	}
 
 	if socket != "" {
