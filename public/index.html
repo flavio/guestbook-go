@@ -55,7 +55,7 @@
 
         created: function() {
           // Use the vue-resource $http client to fetch data from the /messages route
-          this.$http.get('/messages').then(
+          this.$http.get(window.location.pathname + '/messages').then(
             function(response) {
               // success
               this.messages = response.body.messages ? response.body.messages: []
@@ -78,7 +78,7 @@
             }
 
             // Post the new message to the /messages route using the $http client
-            this.$http.put('/messages', this.newMessage).then(
+            this.$http.put(window.location.pathname + '/messages', this.newMessage).then(
               function(response) {
                 //success
                 this.newMessage.index = response.body.index
@@ -100,7 +100,7 @@
 
           deleteMessage: function(index) {
             // Use the $http client to delete a message by its index
-            this.$http.delete('/messages/' + index).then(
+            this.$http.delete(window.location.pathname + '/messages/' + index).then(
               function(response) {
                 this.messages.splice(index, 1)
 
