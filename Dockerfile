@@ -1,15 +1,15 @@
-FROM golang:1.8-alpine
+FROM golang:1.13-alpine
 
-COPY . /go/src/github.com/flavio/guestbook-go
-WORKDIR /go/src/github.com/flavio/guestbook-go
-RUN go build
+COPY . /code/guestbook-go
+WORKDIR /code/guestbook-go
+RUN go build -mod vendor
 
 
 FROM alpine
 WORKDIR /app
 RUN adduser -h /app -D web
-COPY --from=0 /go/src/github.com/flavio/guestbook-go/guestbook-go /app/guestbook
-COPY --from=0 /go/src/github.com/flavio/guestbook-go/public /app/public
+COPY --from=0 /code/guestbook-go/guestbook-go /app/guestbook
+COPY --from=0 /code/guestbook-go/public /app/public
 
 ## Cannot use the --chown option of COPY because it's not supported by
 ## Docker Hub's automated builds :/

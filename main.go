@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-redis/redis"
 	"github.com/labstack/echo"
-	"gopkg.in/urfave/cli.v1"
+	"github.com/urfave/cli"
 )
 
 func main() {

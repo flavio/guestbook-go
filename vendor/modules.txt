@@ -1,0 +1,29 @@
+# github.com/go-redis/redis v6.8.0+incompatible
+github.com/go-redis/redis
+github.com/go-redis/redis/internal
+github.com/go-redis/redis/internal/consistenthash
+github.com/go-redis/redis/internal/hashtag
+github.com/go-redis/redis/internal/pool
+github.com/go-redis/redis/internal/proto
+# github.com/labstack/echo v3.2.6+incompatible
+github.com/labstack/echo
+# github.com/labstack/gommon v0.0.0-20170925052817-57409ada9da0
+github.com/labstack/gommon/color
+github.com/labstack/gommon/log
+# github.com/mattn/go-colorable v0.0.9
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.3
+github.com/mattn/go-isatty
+# github.com/satori/go.uuid v1.2.0
+github.com/satori/go.uuid
+# github.com/urfave/cli v1.21.0
+github.com/urfave/cli
+# github.com/valyala/bytebufferpool v1.0.0
+github.com/valyala/bytebufferpool
+# github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4
+github.com/valyala/fasttemplate
+# golang.org/x/crypto v0.0.0-20180111101123-5f55bce93ad2
+golang.org/x/crypto/acme/autocert
+golang.org/x/crypto/acme
+# golang.org/x/sys v0.0.0-20180110071738-810d70003458
+golang.org/x/sys/unix
