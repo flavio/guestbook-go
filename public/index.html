@@ -42,6 +42,18 @@
     </div>
 
     <script>
+      function sanitizeUrl(url) {
+        var sanitized = url
+           .replace(/^http\:\/\//, '') // remove the leading http:// (temporarily)
+           .replace(/\/+/g, '/')       // replace consecutive slashes with a single slash
+           .replace(/\/+$/, '');       // remove trailing slashes
+        if (url.startsWith("https://")) {
+          return 'https://' + sanitized;
+        } else {
+          return 'http://' + sanitized;
+        }
+      }
+
       var app = new Vue({
         el: '#app',
 
@@ -55,7 +67,7 @@
 
         created: function() {
           // Use the vue-resource $http client to fetch data from the /messages route
-          this.$http.get(window.location.href + '/messages').then(
+          this.$http.get(sanitizeUrl(window.location.href + '/messages')).then(
             function(response) {
               // success
               this.messages = response.body.messages ? response.body.messages: []
@@ -78,7 +90,7 @@
             }
 
             // Post the new message to the /messages route using the $http client
-            this.$http.put(window.location.href + '/messages', this.newMessage).then(
+            this.$http.put(sanitizeUrl(window.location.href + '/messages'), this.newMessage).then(
               function(response) {
                 //success
                 this.newMessage.index = response.body.index
@@ -100,7 +112,7 @@
 
           deleteMessage: function(index) {
             // Use the $http client to delete a message by its index
-            this.$http.delete(window.location.href + '/messages/' + index).then(
+            this.$http.delete(sanitizeUrl(window.location.href + '/messages/' + index)).then(
               function(response) {
                 this.messages.splice(index, 1)
 
